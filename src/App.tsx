@@ -8,16 +8,16 @@ import { TripStateProvider } from "./context/TripStateProvider";
 
 function App() {
 	return (
-		<Router>
-			<Header />
-			<Switch>
-				<Route path="/">
-					<TripStateProvider>
+		<TripStateProvider>
+			<Router>
+				<Header />
+				<Switch>
+					<Route path="/">
 						<TripAdvisor />
-					</TripStateProvider>
-				</Route>
-			</Switch>
-		</Router>
+					</Route>
+				</Switch>
+			</Router>
+		</TripStateProvider>
 	);
 }
 

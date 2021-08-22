@@ -1,14 +1,25 @@
 import "./header.css";
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Container, Navbar, Nav } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { useTripContext } from "../../context/TripStateProvider";
-import ReactGoogleAutocomplete from "react-google-autocomplete";
-import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
+import { StandaloneSearchBox } from "@react-google-maps/api";
 
 function Header() {
 	const context = useTripContext();
+	const [searchBox, setSearchBox] = useState<google.maps.places.SearchBox>({} as google.maps.places.SearchBox);
+
+	const onLoad = (ref: google.maps.places.SearchBox) => {
+		setSearchBox(ref);
+	};
+
+	const onPlacesChanged = () => {
+		context.setCoords({
+			lat: searchBox.getPlaces()[0].geometry?.location.lat()!,
+			lng: searchBox.getPlaces()[0].geometry?.location.lng()!,
+		});
+	};
 
 	return (
 		<Navbar bg="dark" variant="dark">
@@ -26,14 +37,11 @@ function Header() {
 					</LinkContainer>
 				</Nav>
 				<Nav>
-					<ReactGoogleAutocomplete
-						apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
-						onPlaceSelected={(place) => {
-							geocodeByAddress(place.formatted_address!)
-								.then((results) => getLatLng(results[0]))
-								.then(({ lat, lng }) => context.setCoords({ lat, lng }));
-						}}
-					></ReactGoogleAutocomplete>
+					<div className="autocomplete">
+						<StandaloneSearchBox onLoad={onLoad} onPlacesChanged={onPlacesChanged}>
+							<input type="text" placeholder="Enter Location" />
+						</StandaloneSearchBox>
+					</div>
 				</Nav>
 			</Container>
 		</Navbar>

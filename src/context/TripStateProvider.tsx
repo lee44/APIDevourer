@@ -3,36 +3,37 @@ import React, { useState, useContext } from "react";
 type Place = {
 	city: string;
 };
+
 //TripContextState is a type that ensures any instances must have the property, places
 type TripContextData = {
 	type: string;
 	rating: string;
-	coords: object;
+	coords: google.maps.LatLngLiteral;
 	bounds: object;
 	filteredPlaces: Place[]; //array of Place objects;
 	places: Place[]; //array of Place objects
-	autoComplete: React.SyntheticEvent<HTMLInputElement, Event> | undefined;
+	autoComplete: string;
 	childClicked: null;
 	isLoading: boolean;
 	setType: React.Dispatch<React.SetStateAction<string>>;
 	setRating: React.Dispatch<React.SetStateAction<string>>;
-	setCoords: React.Dispatch<React.SetStateAction<{}>>;
+	setCoords: React.Dispatch<React.SetStateAction<google.maps.LatLngLiteral>>;
 	setBounds: React.Dispatch<React.SetStateAction<{}>>;
 	setFilteredPlaces: React.Dispatch<React.SetStateAction<Place[]>>;
 	setPlaces: React.Dispatch<React.SetStateAction<Place[]>>;
-	setAutoComplete: React.Dispatch<React.SetStateAction<React.SyntheticEvent<HTMLInputElement, Event> | undefined>>;
+	setAutoComplete: React.Dispatch<React.SetStateAction<string>>;
 	setChildClicked: React.Dispatch<React.SetStateAction<null>>;
 	setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 };
 // initialState is an instance of TripContextState, therefore must have all properties in Trip
 const initialState: TripContextData = {
-	type: "Restaurants",
+	type: "",
 	rating: "",
-	coords: {},
+	coords: { lat: 0, lng: 0 },
 	bounds: {},
 	filteredPlaces: [],
 	places: [],
-	autoComplete: undefined,
+	autoComplete: "",
 	childClicked: null,
 	isLoading: false,
 	setType: () => null,
@@ -49,17 +50,17 @@ const initialState: TripContextData = {
 const TripContext = React.createContext(initialState);
 
 const TripStateProvider = ({ children }: { children: React.ReactNode }) => {
-	const [type, setType] = useState("");
+	const [type, setType] = useState("Restaurant");
 	const [rating, setRating] = useState("");
 
-	const [coords, setCoords] = useState({});
+	const [coords, setCoords] = useState<google.maps.LatLngLiteral>({ lat: 0, lng: 0 });
 	const [bounds, setBounds] = useState({});
 
 	const [weatherData, setWeatherData] = useState([]);
 	const [filteredPlaces, setFilteredPlaces] = useState<Place[]>([]);
 	const [places, setPlaces] = useState<Place[]>([]);
 
-	const [autoComplete, setAutoComplete] = useState<React.SyntheticEvent<HTMLInputElement, Event> | undefined>();
+	const [autoComplete, setAutoComplete] = useState("");
 	const [childClicked, setChildClicked] = useState(null);
 	const [isLoading, setIsLoading] = useState(false);
 

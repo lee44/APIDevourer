@@ -3,6 +3,7 @@ import Map from "./Map/Map";
 import PlaceList from "./PlaceList/PlaceList";
 import { Container, Row, Col } from "react-bootstrap";
 import { useTripContext } from "../../context/TripStateProvider";
+import { getPlacesData } from "./API/travelAdvisorAPI";
 
 function TripAdvisor() {
 	const context = useTripContext();
@@ -20,7 +21,7 @@ function TripAdvisor() {
 					<PlaceList />
 				</Col>
 				<Col sm={8} className="my-1">
-					{/* <Map /> */}
+					<Map />
 				</Col>
 			</Row>
 		</Container>
