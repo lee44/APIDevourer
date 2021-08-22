@@ -9,7 +9,7 @@ type TripContextData = {
 	type: string;
 	rating: string;
 	coords: google.maps.LatLngLiteral;
-	bounds: object;
+	bounds: { ne: google.maps.LatLng | undefined; sw: google.maps.LatLng | undefined };
 	filteredPlaces: Place[]; //array of Place objects;
 	places: Place[]; //array of Place objects
 	autoComplete: string;
@@ -18,7 +18,9 @@ type TripContextData = {
 	setType: React.Dispatch<React.SetStateAction<string>>;
 	setRating: React.Dispatch<React.SetStateAction<string>>;
 	setCoords: React.Dispatch<React.SetStateAction<google.maps.LatLngLiteral>>;
-	setBounds: React.Dispatch<React.SetStateAction<{}>>;
+	setBounds: React.Dispatch<
+		React.SetStateAction<{ ne: google.maps.LatLng | undefined; sw: google.maps.LatLng | undefined }>
+	>;
 	setFilteredPlaces: React.Dispatch<React.SetStateAction<Place[]>>;
 	setPlaces: React.Dispatch<React.SetStateAction<Place[]>>;
 	setAutoComplete: React.Dispatch<React.SetStateAction<string>>;
@@ -30,7 +32,7 @@ const initialState: TripContextData = {
 	type: "",
 	rating: "",
 	coords: { lat: 0, lng: 0 },
-	bounds: {},
+	bounds: { ne: undefined, sw: undefined },
 	filteredPlaces: [],
 	places: [],
 	autoComplete: "",
@@ -50,11 +52,14 @@ const initialState: TripContextData = {
 const TripContext = React.createContext(initialState);
 
 const TripStateProvider = ({ children }: { children: React.ReactNode }) => {
-	const [type, setType] = useState("Restaurant");
+	const [type, setType] = useState("restaurants");
 	const [rating, setRating] = useState("");
 
 	const [coords, setCoords] = useState<google.maps.LatLngLiteral>({ lat: 0, lng: 0 });
-	const [bounds, setBounds] = useState({});
+	const [bounds, setBounds] = useState<TripContextData["bounds"]>({
+		ne: undefined,
+		sw: undefined,
+	});
 
 	const [weatherData, setWeatherData] = useState([]);
 	const [filteredPlaces, setFilteredPlaces] = useState<Place[]>([]);

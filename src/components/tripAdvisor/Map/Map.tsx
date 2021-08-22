@@ -5,11 +5,14 @@ import { useTripContext } from "../../../context/TripStateProvider";
 
 function Maps() {
 	const context = useTripContext();
-	const refMap = React.useRef<google.maps.Map<Element> | null>(null);
-
+	const mapRef = React.useRef<google.maps.Map<Element> | null>(null);
 	const containerStyle = {
 		width: "100%",
 		height: "93vh",
+	};
+
+	const onLoaded = (map: google.maps.Map<Element>) => {
+		mapRef.current = map;
 	};
 
 	return (
@@ -18,7 +21,13 @@ function Maps() {
 				mapContainerStyle={containerStyle}
 				center={context.coords}
 				zoom={10}
-				onBoundsChanged={() => {}}
+				onLoad={onLoaded}
+				onBoundsChanged={() => {
+					context.setBounds({
+						ne: mapRef.current?.getBounds()?.getNorthEast(),
+						sw: mapRef.current?.getBounds()?.getSouthWest(),
+					});
+				}}
 			></GoogleMap>
 		</div>
 	);
