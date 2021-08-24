@@ -1,12 +1,15 @@
 import React, { useState, useContext } from "react";
 
 export type Place = {
-	address: string;
+	location_id: string;
+	address_obj: { city: string; street1: string };
 	category: { key: string; name: string };
 	cuisine: [{ key: string; name: string }];
 	description: string;
 	distance: string;
 	email: string;
+	latitude: string;
+	longitude: string;
 	open_now_text: string;
 	phone: string;
 	photo: { images: { original: { url: string } } };

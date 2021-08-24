@@ -1,5 +1,5 @@
 import React from "react";
-import { GoogleMap } from "@react-google-maps/api";
+import { GoogleMap, Marker } from "@react-google-maps/api";
 import "./map.css";
 import { useTripContext } from "../../../context/TripStateProvider";
 
@@ -20,15 +20,21 @@ function Maps() {
 			<GoogleMap
 				mapContainerStyle={containerStyle}
 				center={context.coords}
-				zoom={10}
+				zoom={14}
 				onLoad={onLoaded}
 				onBoundsChanged={() => {
-					context.setBounds({
-						ne: mapRef.current?.getBounds()?.getNorthEast(),
-						sw: mapRef.current?.getBounds()?.getSouthWest(),
-					});
+					// context.setBounds({
+					// 	ne: mapRef.current?.getBounds()?.getNorthEast(),
+					// 	sw: mapRef.current?.getBounds()?.getSouthWest(),
+					// });
 				}}
-			></GoogleMap>
+			>
+				{context.places.map((place, index) => {
+					if (place.latitude && place.longitude) {
+						return <Marker key={index} animation={google.maps.Animation.DROP} position={{ lat: Number(place.latitude), lng: Number(place.longitude) }} />;
+					}
+				})}
+			</GoogleMap>
 		</div>
 	);
 }

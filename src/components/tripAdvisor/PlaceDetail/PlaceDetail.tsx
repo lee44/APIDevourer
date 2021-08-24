@@ -18,7 +18,7 @@ const PlaceDetail: React.FC<{ place: Place }> = ({ place }) => {
 				<Card.Subtitle>
 					{place.rating} stars | ({place.num_reviews}) | {place.price_level}
 				</Card.Subtitle>
-				<Card.Text>{place.address}</Card.Text>
+				<Card.Text>{place.address_obj.street1 + ", " + place.address_obj.city}</Card.Text>
 				<Card.Text>{place.description}</Card.Text>
 			</Card.Body>
 			<ListGroup className="list-group-flush">
