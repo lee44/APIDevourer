@@ -9,18 +9,23 @@ function PlaceList() {
 	useEffect(() => {
 		if (bounds.sw && bounds.ne) {
 			getPlacesData(type, bounds.sw, bounds.ne).then((data) => {
-				console.log(data);
 				setPlaces(data);
 			});
 		}
-	}, [bounds]);
+	}, [bounds, setPlaces, type]);
 
 	return (
 		<>
 			{places.map((place: Place, index) => {
-				return place.name ? <PlaceDetail key={index} place={place}></PlaceDetail> : "";
+				return place.name ? (
+					<>
+						<PlaceDetail key={index} place={place}></PlaceDetail>
+						<div className="place-detail-spacing"></div>
+					</>
+				) : (
+					""
+				);
 			})}
-			<hr></hr>
 		</>
 	);
 }

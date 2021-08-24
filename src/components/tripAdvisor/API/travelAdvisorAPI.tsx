@@ -1,15 +1,6 @@
 import axios from "axios";
 
-type LatLong = {
-	lat: number;
-	lng: number;
-};
-
-export const getPlacesData = async (
-	type: string,
-	sw: google.maps.LatLng | undefined,
-	ne: google.maps.LatLng | undefined
-) => {
+export const getPlacesData = async (type: string, sw: google.maps.LatLng | undefined, ne: google.maps.LatLng | undefined) => {
 	try {
 		const {
 			data: { data },

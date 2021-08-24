@@ -3,7 +3,6 @@ import Map from "./Map/Map";
 import PlaceList from "./PlaceList/PlaceList";
 import { Container, Row, Col } from "react-bootstrap";
 import { useTripContext } from "../../context/TripStateProvider";
-import { getPlacesData } from "./API/travelAdvisorAPI";
 import "./tripadvisor.css";
 
 function TripAdvisor() {

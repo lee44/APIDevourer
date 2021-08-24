@@ -1,6 +1,5 @@
 import "./header.css";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import { Container, Navbar, Nav } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { useTripContext } from "../../context/TripStateProvider";

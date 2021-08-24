@@ -1,5 +1,5 @@
-import React, { useRef } from "react";
-import { GoogleMap, LoadScript } from "@react-google-maps/api";
+import React from "react";
+import { GoogleMap } from "@react-google-maps/api";
 import "./map.css";
 import { useTripContext } from "../../../context/TripStateProvider";
 
@@ -23,10 +23,10 @@ function Maps() {
 				zoom={10}
 				onLoad={onLoaded}
 				onBoundsChanged={() => {
-					// context.setBounds({
-					// 	ne: mapRef.current?.getBounds()?.getNorthEast(),
-					// 	sw: mapRef.current?.getBounds()?.getSouthWest(),
-					// });
+					context.setBounds({
+						ne: mapRef.current?.getBounds()?.getNorthEast(),
+						sw: mapRef.current?.getBounds()?.getSouthWest(),
+					});
 				}}
 			></GoogleMap>
 		</div>

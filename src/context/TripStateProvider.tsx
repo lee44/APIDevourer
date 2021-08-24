@@ -70,7 +70,7 @@ const TripStateProvider = ({ children }: { children: React.ReactNode }) => {
 	const [coords, setCoords] = useState<google.maps.LatLngLiteral>({ lat: 0, lng: 0 });
 	const [bounds, setBounds] = useState<TripContextData["bounds"]>({ ne: undefined, sw: undefined });
 
-	const [weatherData, setWeatherData] = useState([]);
+	// const [weatherData, setWeatherData] = useState([]);
 	const [filteredPlaces, setFilteredPlaces] = useState<Place[]>([]);
 	const [places, setPlaces] = useState<Place[]>([]);
 
