@@ -23,10 +23,10 @@ function Maps() {
 				zoom={10}
 				onLoad={onLoaded}
 				onBoundsChanged={() => {
-					context.setBounds({
-						ne: mapRef.current?.getBounds()?.getNorthEast(),
-						sw: mapRef.current?.getBounds()?.getSouthWest(),
-					});
+					// context.setBounds({
+					// 	ne: mapRef.current?.getBounds()?.getNorthEast(),
+					// 	sw: mapRef.current?.getBounds()?.getSouthWest(),
+					// });
 				}}
 			></GoogleMap>
 		</div>

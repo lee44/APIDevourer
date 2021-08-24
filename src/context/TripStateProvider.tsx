@@ -1,7 +1,21 @@
 import React, { useState, useContext } from "react";
 
-type Place = {
-	city: string;
+export type Place = {
+	address: string;
+	category: { key: string; name: string };
+	cuisine: [{ key: string; name: string }];
+	description: string;
+	distance: string;
+	email: string;
+	open_now_text: string;
+	phone: string;
+	photo: { images: { original: { url: string } } };
+	name: string;
+	rating: string;
+	num_reviews: string;
+	price_level: string;
+	ranking: string;
+	website: string;
 };
 
 //TripContextState is a type that ensures any instances must have the property, places
@@ -11,16 +25,14 @@ type TripContextData = {
 	coords: google.maps.LatLngLiteral;
 	bounds: { ne: google.maps.LatLng | undefined; sw: google.maps.LatLng | undefined };
 	filteredPlaces: Place[]; //array of Place objects;
-	places: Place[]; //array of Place objects
+	places: Place[];
 	autoComplete: string;
 	childClicked: null;
 	isLoading: boolean;
 	setType: React.Dispatch<React.SetStateAction<string>>;
 	setRating: React.Dispatch<React.SetStateAction<string>>;
 	setCoords: React.Dispatch<React.SetStateAction<google.maps.LatLngLiteral>>;
-	setBounds: React.Dispatch<
-		React.SetStateAction<{ ne: google.maps.LatLng | undefined; sw: google.maps.LatLng | undefined }>
-	>;
+	setBounds: React.Dispatch<React.SetStateAction<{ ne: google.maps.LatLng | undefined; sw: google.maps.LatLng | undefined }>>;
 	setFilteredPlaces: React.Dispatch<React.SetStateAction<Place[]>>;
 	setPlaces: React.Dispatch<React.SetStateAction<Place[]>>;
 	setAutoComplete: React.Dispatch<React.SetStateAction<string>>;
@@ -56,10 +68,7 @@ const TripStateProvider = ({ children }: { children: React.ReactNode }) => {
 	const [rating, setRating] = useState("");
 
 	const [coords, setCoords] = useState<google.maps.LatLngLiteral>({ lat: 0, lng: 0 });
-	const [bounds, setBounds] = useState<TripContextData["bounds"]>({
-		ne: undefined,
-		sw: undefined,
-	});
+	const [bounds, setBounds] = useState<TripContextData["bounds"]>({ ne: undefined, sw: undefined });
 
 	const [weatherData, setWeatherData] = useState([]);
 	const [filteredPlaces, setFilteredPlaces] = useState<Place[]>([]);

@@ -1,19 +1,28 @@
 import React, { useEffect } from "react";
-import { useTripContext } from "../../../context/TripStateProvider";
+import { Place, useTripContext } from "../../../context/TripStateProvider";
 import { getPlacesData } from "../API/travelAdvisorAPI";
+import PlaceDetail from "../PlaceDetail/PlaceDetail";
 
 function PlaceList() {
-	const { type, bounds } = useTripContext();
+	const { type, bounds, places, setPlaces } = useTripContext();
 
 	useEffect(() => {
 		if (bounds.sw && bounds.ne) {
 			getPlacesData(type, bounds.sw, bounds.ne).then((data) => {
 				console.log(data);
+				setPlaces(data);
 			});
 		}
 	}, [bounds]);
 
-	return <div></div>;
+	return (
+		<>
+			{places.map((place: Place, index) => {
+				return place.name ? <PlaceDetail key={index} place={place}></PlaceDetail> : "";
+			})}
+			<hr></hr>
+		</>
+	);
 }
 
 export default PlaceList;

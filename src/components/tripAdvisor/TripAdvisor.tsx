@@ -4,6 +4,7 @@ import PlaceList from "./PlaceList/PlaceList";
 import { Container, Row, Col } from "react-bootstrap";
 import { useTripContext } from "../../context/TripStateProvider";
 import { getPlacesData } from "./API/travelAdvisorAPI";
+import "./tripadvisor.css";
 
 function TripAdvisor() {
 	const context = useTripContext();
@@ -17,10 +18,12 @@ function TripAdvisor() {
 	return (
 		<Container fluid>
 			<Row>
-				<Col sm={4} className="my-1">
-					<PlaceList />
+				<Col xs={{ span: 12, order: "last" }} xl={{ span: 4, order: "first" }} xxl={{ span: 3, order: "first" }} className="my-1">
+					<div className="place-list-container">
+						<PlaceList />
+					</div>
 				</Col>
-				<Col sm={8} className="my-1">
+				<Col xs={{ span: 12, order: "first" }} xl={{ span: 8, order: "last" }} xxl={{ span: 9, order: "first" }} className="my-1">
 					<Map />
 				</Col>
 			</Row>
