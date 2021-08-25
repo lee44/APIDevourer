@@ -2,7 +2,7 @@ import React from "react";
 import { Card, ListGroup, ListGroupItem } from "react-bootstrap";
 import { Place } from "../../../context/TripStateProvider";
 import "./placedetail.css";
-import { MdEmail } from "react-icons/md";
+import { MdEmail, MdStar } from "react-icons/md";
 
 const PlaceDetail: React.FC<{ place: Place }> = ({ place }) => {
 	return (
@@ -16,17 +16,17 @@ const PlaceDetail: React.FC<{ place: Place }> = ({ place }) => {
 					{/* <span>{place.open_now_text}</span> */}
 				</Card.Title>
 				<Card.Subtitle>
-					{place.rating} stars | ({place.num_reviews}) | {place.price_level}
+					{place.rating} <MdStar className="star" /> | ({place.num_reviews}) | {place.price_level}
 				</Card.Subtitle>
 				<Card.Text>{place.address_obj.street1 + ", " + place.address_obj.city}</Card.Text>
-				<Card.Text>{place.description}</Card.Text>
+				{/* <Card.Text>{place.description}</Card.Text> */}
 			</Card.Body>
-			<ListGroup className="list-group-flush">
+			{/* <ListGroup className="list-group-flush">
 				<ListGroupItem>
 					<MdEmail></MdEmail>
 					{place.email}
 				</ListGroupItem>
-			</ListGroup>
+			</ListGroup> */}
 		</Card>
 	);
 };

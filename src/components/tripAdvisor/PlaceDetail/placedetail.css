@@ -20,3 +20,11 @@
 	border: 1px solid #ebebeb;
 	margin: 1rem 0;
 }
+
+.star {
+	margin-bottom: 3px;
+	color: rgb(255, 208, 0);
+}
+
+.infoWindow {
+}

@@ -10,8 +10,6 @@ function TripAdvisor() {
 
 	useEffect(() => {
 		navigator.geolocation.getCurrentPosition(({ coords: { latitude, longitude } }) => {
-			console.log({ lat: latitude, lng: longitude });
-
 			context.setCoords({ lat: latitude, lng: longitude });
 		});
 	}, []);
