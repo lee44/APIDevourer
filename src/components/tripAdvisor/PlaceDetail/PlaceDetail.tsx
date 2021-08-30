@@ -6,7 +6,7 @@ import { MdEmail, MdStar } from "react-icons/md";
 
 const PlaceDetail: React.FC<{ place: Place }> = ({ place }) => {
 	return (
-		<Card className="card-size">
+		<Card>
 			<Card.Img variant="top" className="card-img" src={place.photo.images.original.url} />
 			<Card.Body>
 				<Card.Title>

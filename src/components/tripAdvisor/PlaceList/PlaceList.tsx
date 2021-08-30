@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Place, useTripContext } from "../../../context/TripStateProvider";
 import { getPlacesData } from "../API/travelAdvisorAPI";
 import PlaceDetail from "../PlaceDetail/PlaceDetail";
+import "./placelist.css";
 
 function PlaceList() {
 	const { type, bounds, places, setPlaces } = useTripContext();
@@ -19,10 +20,10 @@ function PlaceList() {
 		<>
 			{places.map((place: Place, index) => {
 				return place.name ? (
-					<PlaceDetail key={index} place={place}></PlaceDetail>
+					<div key={index} className="place-detail-spacing">
+						<PlaceDetail place={place}></PlaceDetail>
+					</div>
 				) : (
-					// <div key={index + 100} className="place-detail-spacing"></div>
-
 					""
 				);
 			})}
