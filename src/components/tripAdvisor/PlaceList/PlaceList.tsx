@@ -9,8 +9,8 @@ function PlaceList() {
 
 	useEffect(() => {
 		if (bounds.sw && bounds.ne) {
-			console.log("getPlacesData called");
 			getPlacesData(type, bounds.sw, bounds.ne).then((data) => {
+				//console.log(data);
 				setPlaces(data);
 			});
 		}

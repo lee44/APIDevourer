@@ -42,6 +42,7 @@ function Maps() {
 				mapContainerStyle={containerStyle}
 				center={coords}
 				zoom={14}
+				options={{ fullscreenControl: false }}
 				onLoad={onLoaded}
 				onBoundsChanged={() => {
 					clearTimeout(timer);
@@ -51,7 +52,7 @@ function Maps() {
 							ne: mapRef.current?.getBounds()?.getNorthEast(),
 							sw: mapRef.current?.getBounds()?.getSouthWest(),
 						});
-					}, 2000);
+					}, 1000);
 				}}
 				onDragEnd={() => {
 					setBounds({
