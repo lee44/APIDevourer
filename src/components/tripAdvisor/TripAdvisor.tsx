@@ -22,7 +22,7 @@ function TripAdvisor() {
 					md={{ span: 4, order: "first" }}
 					lg={{ span: 3, order: "first" }}
 					xl={{ span: 2, order: "first" }}
-					className="my-1"
+					className="px-0"
 				>
 					<div className="place-list-container">
 						<PlaceList />
@@ -33,7 +33,7 @@ function TripAdvisor() {
 					md={{ span: 8, order: "last" }}
 					lg={{ span: 9, order: "first" }}
 					xl={{ span: 10, order: "first" }}
-					className="my-1"
+					className="px-0"
 				>
 					<Map />
 				</Col>

@@ -15,6 +15,7 @@ function Maps() {
 		height: "93vh",
 	};
 
+	// This snippet creates an array of useRef that will be pointing to each place
 	const elRefs = React.useRef([]);
 	const arrLength = places.length;
 	if (elRefs.current.length !== arrLength) {
@@ -33,6 +34,8 @@ function Maps() {
 		setInfoWindowDetails(place);
 	};
 
+	let timer: NodeJS.Timeout;
+
 	return (
 		<div className={"map-container"}>
 			<GoogleMap
@@ -41,13 +44,14 @@ function Maps() {
 				zoom={14}
 				onLoad={onLoaded}
 				onBoundsChanged={() => {
-					if (!loaded) {
+					clearTimeout(timer);
+					timer = setTimeout(() => {
+						console.log("Bounds Changed");
 						setBounds({
 							ne: mapRef.current?.getBounds()?.getNorthEast(),
 							sw: mapRef.current?.getBounds()?.getSouthWest(),
 						});
-						setLoaded(true);
-					}
+					}, 2000);
 				}}
 				onDragEnd={() => {
 					setBounds({
@@ -69,6 +73,7 @@ function Maps() {
 							></Marker>
 						);
 					}
+					return;
 				})}
 				{infoWindowLatLng && (
 					<InfoWindow

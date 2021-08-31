@@ -1,7 +1,6 @@
 import "./header.css";
 import React, { useState } from "react";
 import { Container, Navbar, Nav } from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
 import { useTripContext } from "../../context/TripStateProvider";
 import { StandaloneSearchBox } from "@react-google-maps/api";
 
@@ -18,23 +17,13 @@ function Header() {
 			lat: searchBox.getPlaces()[0].geometry?.location.lat()!,
 			lng: searchBox.getPlaces()[0].geometry?.location.lng()!,
 		});
+		console.log("New Location Entered", context.coords);
 	};
 
 	return (
 		<Navbar bg="dark" variant="dark">
 			<Container>
-				<Navbar.Brand href="#home">APIDevourer</Navbar.Brand>
-				<Nav className="me-auto">
-					<LinkContainer to="/">
-						<Nav.Link>Home</Nav.Link>
-					</LinkContainer>
-					<LinkContainer to="/sports">
-						<Nav.Link>Sports</Nav.Link>
-					</LinkContainer>
-					<LinkContainer to="/tripadvisor">
-						<Nav.Link>Trip Advisor</Nav.Link>
-					</LinkContainer>
-				</Nav>
+				<Navbar.Brand href="#home">TripAdvisor</Navbar.Brand>
 				<Nav>
 					<div className="autocomplete">
 						<StandaloneSearchBox onLoad={onLoad} onPlacesChanged={onPlacesChanged}>
