@@ -4,9 +4,13 @@ import { Place } from "../../../context/TripStateProvider";
 import "./placedetail.css";
 import { MdEmail, MdStar } from "react-icons/md";
 
-const PlaceDetail: React.FC<{ place: Place }> = ({ place }) => {
+const PlaceDetail: React.FC<{ place: Place; selected: boolean; refProp: React.MutableRefObject<HTMLDivElement> }> = ({ place, selected, refProp }) => {
+	if (selected) {
+		refProp?.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+		console.log("ScrollIntoView Called");
+	}
 	return (
-		<Card>
+		<Card ref={refProp}>
 			<Card.Img variant="top" className="card-img" src={place.photo.images.original.url} />
 			<Card.Body>
 				<Card.Title>
@@ -31,4 +35,4 @@ const PlaceDetail: React.FC<{ place: Place }> = ({ place }) => {
 	);
 };
 
-export default PlaceDetail;
+export default React.memo(PlaceDetail);

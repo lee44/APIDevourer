@@ -21,7 +21,7 @@ export type Place = {
 	website: string;
 };
 
-//TripContextState is a type that ensures any instances must have the property, places
+//TripContextState is a type that ensures any instances must have the following properties
 type TripContextData = {
 	type: string;
 	rating: string;
@@ -30,7 +30,7 @@ type TripContextData = {
 	filteredPlaces: Place[]; //array of Place objects;
 	places: Place[];
 	autoComplete: string;
-	childClicked: null;
+	childClicked: Number | undefined;
 	isLoading: boolean;
 	setType: React.Dispatch<React.SetStateAction<string>>;
 	setRating: React.Dispatch<React.SetStateAction<string>>;
@@ -39,10 +39,10 @@ type TripContextData = {
 	setFilteredPlaces: React.Dispatch<React.SetStateAction<Place[]>>;
 	setPlaces: React.Dispatch<React.SetStateAction<Place[]>>;
 	setAutoComplete: React.Dispatch<React.SetStateAction<string>>;
-	setChildClicked: React.Dispatch<React.SetStateAction<null>>;
+	setChildClicked: React.Dispatch<React.SetStateAction<Number | undefined>>;
 	setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 };
-// initialState is an instance of TripContextState, therefore must have all properties in Trip
+// initialState is an instance of TripContextState, therefore must have all properties in TripContextData
 const initialState: TripContextData = {
 	type: "",
 	rating: "",
@@ -51,7 +51,7 @@ const initialState: TripContextData = {
 	filteredPlaces: [],
 	places: [],
 	autoComplete: "",
-	childClicked: null,
+	childClicked: undefined,
 	isLoading: false,
 	setType: () => null,
 	setRating: () => null,
@@ -78,7 +78,7 @@ const TripStateProvider = ({ children }: { children: React.ReactNode }) => {
 	const [places, setPlaces] = useState<Place[]>([]);
 
 	const [autoComplete, setAutoComplete] = useState("");
-	const [childClicked, setChildClicked] = useState(null);
+	const [childClicked, setChildClicked] = useState<Number | undefined>();
 	const [isLoading, setIsLoading] = useState(false);
 
 	return (

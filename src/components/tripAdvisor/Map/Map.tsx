@@ -5,8 +5,7 @@ import { Place, useTripContext } from "../../../context/TripStateProvider";
 import { MdStar } from "react-icons/md";
 
 function Maps() {
-	const { coords, places, setBounds } = useTripContext();
-	const [loaded, setLoaded] = useState(false);
+	const { coords, places, setBounds, setChildClicked } = useTripContext();
 	const [infoWindowLatLng, setinfoWindowLatLng] = useState<google.maps.LatLng>();
 	const [infoWindowDetails, setInfoWindowDetails] = useState<Place>();
 	const mapRef = React.useRef<google.maps.Map<Element> | null>(null);
@@ -15,21 +14,17 @@ function Maps() {
 		height: "93vh",
 	};
 
-	// This snippet creates an array of useRef that will be pointing to each place
-	const elRefs = React.useRef([]);
-	const arrLength = places.length;
-	if (elRefs.current.length !== arrLength) {
-		// add or remove refs
-		elRefs.current = Array(arrLength)
-			.fill(null)
-			.map((_, i) => elRefs.current[i] || React.createRef());
-	}
-
 	const onLoaded = (map: google.maps.Map<Element>) => {
 		mapRef.current = map;
 	};
 
-	const handleClick = (e: google.maps.MapMouseEvent, place: Place) => {
+	const handleMouseClick = (e: google.maps.MapMouseEvent, place: Place, index: Number | undefined) => {
+		setinfoWindowLatLng(e.latLng);
+		setInfoWindowDetails(place);
+		setChildClicked(index);
+	};
+
+	const handleMouseOver = (e: google.maps.MapMouseEvent, place: Place) => {
 		setinfoWindowLatLng(e.latLng);
 		setInfoWindowDetails(place);
 	};
@@ -52,7 +47,7 @@ function Maps() {
 							ne: mapRef.current?.getBounds()?.getNorthEast(),
 							sw: mapRef.current?.getBounds()?.getSouthWest(),
 						});
-					}, 1000);
+					}, 2000);
 				}}
 				onDragEnd={() => {
 					setBounds({
@@ -66,8 +61,8 @@ function Maps() {
 						return (
 							<Marker
 								key={index}
-								onClick={(e) => handleClick(e, place)}
-								onMouseOver={(e) => handleClick(e, place)}
+								onClick={(e) => handleMouseClick(e, place, index)}
+								onMouseOver={(e) => handleMouseOver(e, place)}
 								onMouseOut={(e) => setinfoWindowLatLng(undefined)}
 								animation={google.maps.Animation.DROP}
 								position={{ lat: Number(place.latitude), lng: Number(place.longitude) }}
