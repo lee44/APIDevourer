@@ -3,16 +3,27 @@ import Map from "./Map/Map";
 import PlaceList from "./PlaceList/PlaceList";
 import { Container, Row, Col } from "react-bootstrap";
 import { useTripContext } from "../../context/TripStateProvider";
+import { getPlacesData } from "./API/travelAdvisorAPI";
 import "./tripadvisor.css";
 
 function TripAdvisor() {
-	const context = useTripContext();
+	const { type, bounds, setCoords, setChildClicked, setPlaces } = useTripContext();
 
 	useEffect(() => {
 		navigator.geolocation.getCurrentPosition(({ coords: { latitude, longitude } }) => {
-			context.setCoords({ lat: latitude, lng: longitude });
+			setCoords({ lat: latitude, lng: longitude });
 		});
 	}, []);
+
+	useEffect(() => {
+		if (bounds.sw && bounds.ne) {
+			getPlacesData(type, bounds.sw, bounds.ne).then((data) => {
+				console.log("Getting Places Data");
+				setPlaces(data);
+				setChildClicked(undefined);
+			});
+		}
+	}, [bounds]);
 
 	return (
 		<Container fluid>
