@@ -2,3 +2,10 @@
 	width: 95%;
 	margin-bottom: 0.5rem;
 }
+
+.spinner-container {
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+}

@@ -7,7 +7,7 @@ import { getPlacesData } from "./API/travelAdvisorAPI";
 import "./tripadvisor.css";
 
 function TripAdvisor() {
-	const { type, bounds, setCoords, setChildClicked, setPlaces } = useTripContext();
+	const { type, bounds, setIsLoading, setCoords, setChildClicked, setPlaces } = useTripContext();
 
 	useEffect(() => {
 		navigator.geolocation.getCurrentPosition(({ coords: { latitude, longitude } }) => {
@@ -16,11 +16,13 @@ function TripAdvisor() {
 	}, []);
 
 	useEffect(() => {
+		setIsLoading(true);
 		if (bounds.sw && bounds.ne) {
 			getPlacesData(type, bounds.sw, bounds.ne).then((data) => {
 				console.log("Getting Places Data");
 				setPlaces(data);
 				setChildClicked(undefined);
+				setIsLoading(false);
 			});
 		}
 	}, [bounds]);

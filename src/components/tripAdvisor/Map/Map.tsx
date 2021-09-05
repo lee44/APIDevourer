@@ -68,7 +68,7 @@ function Maps() {
 				{infoWindowLatLng && (
 					<InfoWindow
 						position={infoWindowLatLng}
-						options={{ pixelOffset: { width: 0, height: -43 } as google.maps.Size, disableAutoPan: true }}
+						options={{ pixelOffset: { width: 0, height: -43 } as google.maps.Size /*, disableAutoPan: true*/ }}
 						onCloseClick={() => setinfoWindowLatLng(undefined)}
 					>
 						<div>

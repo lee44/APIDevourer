@@ -1,10 +1,11 @@
 import React, { MutableRefObject, useEffect, useState } from "react";
+import { Spinner } from "react-bootstrap";
 import { Place, useTripContext } from "../../../context/TripStateProvider";
 import PlaceDetail from "../PlaceDetail/PlaceDetail";
 import "./placelist.css";
 
 function PlaceList() {
-	const { places, childClicked } = useTripContext();
+	const { places, childClicked, isLoading } = useTripContext();
 
 	// This snippet creates an array of useRef that will be pointing to each place
 	const [elRefs, setElRefs] = useState<MutableRefObject<HTMLDivElement>[]>([]);
@@ -20,15 +21,23 @@ function PlaceList() {
 
 	return (
 		<>
-			{places.map((place: Place, index) => {
-				return place.name ? (
-					<div key={index} className="place-detail-spacing">
-						<PlaceDetail place={place} selected={childClicked === index} refProp={elRefs[index]}></PlaceDetail>
-					</div>
-				) : (
-					""
-				);
-			})}
+			{isLoading ? (
+				<div className="spinner-container">
+					<Spinner animation="border" role="status">
+						<span className="visually-hidden">Loading...</span>
+					</Spinner>
+				</div>
+			) : (
+				places.map((place: Place, index) => {
+					return place.name ? (
+						<div key={index} className="place-detail-spacing">
+							<PlaceDetail place={place} selected={childClicked === index} refProp={elRefs[index]}></PlaceDetail>
+						</div>
+					) : (
+						""
+					);
+				})
+			)}
 		</>
 	);
 }
