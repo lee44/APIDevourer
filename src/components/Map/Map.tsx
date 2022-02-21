@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { GoogleMap, InfoWindow, Marker } from "@react-google-maps/api";
-import "./map.css";
-import { Place, useTripContext } from "../../../context/TripStateProvider";
-import { MdStar } from "react-icons/md";
+import { GoogleMap, InfoWindow, Marker } from '@react-google-maps/api';
+import React, { useState } from 'react';
+import { MdStar } from 'react-icons/md';
+import { Place, useTripContext } from '../../context/TripStateProvider';
+import './map.css';
 
 function Maps() {
 	const { coords, places, setBounds, setChildClicked } = useTripContext();
@@ -10,8 +10,8 @@ function Maps() {
 	const [infoWindowDetails, setInfoWindowDetails] = useState<Place>();
 	const mapRef = React.useRef<google.maps.Map<Element> | null>(null);
 	const containerStyle = {
-		width: "100%",
-		height: "93vh",
+		width: '100%',
+		height: '93vh',
 	};
 
 	const onLoaded = (map: google.maps.Map<Element>) => {
@@ -32,7 +32,7 @@ function Maps() {
 	let timer: NodeJS.Timeout;
 
 	return (
-		<div className={"map-container"}>
+		<div className={'map-container'}>
 			<GoogleMap
 				mapContainerStyle={containerStyle}
 				center={coords}
@@ -42,7 +42,7 @@ function Maps() {
 				onBoundsChanged={() => {
 					clearTimeout(timer);
 					timer = setTimeout(() => {
-						console.log("Bounds Changed");
+						console.log('Bounds Changed');
 						setBounds({
 							ne: mapRef.current?.getBounds()?.getNorthEast(),
 							sw: mapRef.current?.getBounds()?.getSouthWest(),
@@ -72,9 +72,9 @@ function Maps() {
 						onCloseClick={() => setinfoWindowLatLng(undefined)}
 					>
 						<div>
-							<div className="infoWindow-title">{infoWindowDetails?.name}</div>
+							<div className='infoWindow-title'>{infoWindowDetails?.name}</div>
 							<div>
-								{infoWindowDetails?.rating} <MdStar className="star" />
+								{infoWindowDetails?.rating} <MdStar className='star' />
 							</div>
 						</div>
 					</InfoWindow>
