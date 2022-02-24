@@ -13,7 +13,7 @@ function PlaceList() {
 	useEffect(() => {
 		// When places changes, this will create a new array containing the old Refs + new ones
 		setElRefs((refs) =>
-			Array(places.length)
+			Array(places?.length)
 				.fill(null)
 				.map((_, i) => refs[i] || React.createRef())
 		);
