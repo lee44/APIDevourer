@@ -50,7 +50,7 @@ function Maps() {
 					}, 2000);
 				}}
 			>
-				{places.map((place, index) => {
+				{places?.map((place, index) => {
 					if (place.latitude && place.longitude) {
 						return (
 							<Marker
