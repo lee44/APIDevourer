@@ -28,8 +28,8 @@ function PlaceList() {
 					</Spinner>
 				</div>
 			) : (
-				places.map((place: Place, index) => {
-					return place.name ? (
+				places?.map((place: Place, index) => {
+					return place?.name ? (
 						<div key={index} className='place-detail-spacing'>
 							<PlaceDetail place={place} selected={childClicked === index} refProp={elRefs[index]}></PlaceDetail>
 						</div>
