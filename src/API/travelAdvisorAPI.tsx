@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 export const getPlacesData = async (type: string, sw: google.maps.LatLng | undefined, ne: google.maps.LatLng | undefined) => {
 	try {
@@ -12,8 +12,8 @@ export const getPlacesData = async (type: string, sw: google.maps.LatLng | undef
 				tr_latitude: ne?.lat(),
 			},
 			headers: {
-				"x-rapidapi-key": process.env.REACT_APP_RAPID_API_TRAVEL_API_KEY,
-				"x-rapidapi-host": "travel-advisor.p.rapidapi.com",
+				'x-rapidapi-key': process.env.REACT_APP_RAPID_API_TRAVEL_API_KEY!,
+				'x-rapidapi-host': 'travel-advisor.p.rapidapi.com',
 			},
 		});
 
